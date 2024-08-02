@@ -36,12 +36,3 @@ Route::middleware([
 });
 
 Route::post('/send-email', [EmailController::class, 'send'])->name('send.email');
-
-Route::get('/test-email', function () {
-    Mail::raw('Test email content', function ($message) {
-        $message->to('test@example.com')
-                ->subject('Test Email');
-    });
-
-    return 'Test email sent';
-});

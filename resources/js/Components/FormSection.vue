@@ -49,9 +49,19 @@
             <input type="checkbox" name="privacyPolicy" id="privacy-policy" v-model="form.privacyPolicy" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600">
             <label for="privacy-policy" class="ml-2 block text-sm text-gray-900">Accept privacy policy</label>
           </div>
-          <div>
-            <button type="submit" class="w-full rounded-md bg-blue-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">SEND</button>
-          </div>
+
+          <div v-if="form.errors" class="text-red-600">
+      <div v-for="(error, key) in form.errors" :key="key">{{ error }}</div>
+    </div>
+    
+    <div v-if="form.recentlySuccessful" class="text-green-600">
+      Email sent successfully!
+    </div>
+
+    <button type="submit" :disabled="form.processing" class="w-full rounded-md bg-blue-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+      {{ form.processing ? 'Sending...' : 'SEND' }}
+    </button>
+          
         </form>
       </div>
 
@@ -67,10 +77,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
+import { useForm } from '@inertiajs/vue3'
 
-const form = ref({
+const form = useForm({
   name: '',
   surname: '',
   email: '',
@@ -80,19 +89,12 @@ const form = ref({
   company: '',
   message: '',
   privacyPolicy: false
-});
+})
 
 const sendEmail = () => {
-  const formData = { ...form.value };
-
-  // Remove empty fields
-  Object.keys(formData).forEach(key => {
-    if (formData[key] === '' || formData[key] === false) {
-      delete formData[key];
-    }
-  });
-
-  console.log("Sending Data:", formData);
-  Inertia.post('/send-email', formData);
+  form.post(route('send.email'), {
+    preserveState: true,
+    preserveScroll: true,
+  })
 }
 </script>
