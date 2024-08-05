@@ -1,37 +1,39 @@
 <template>
-  <div class="bg-white p-4 rounded-lg shadow-lg relative max-w-4xl mx-auto">
+  <div class="bg-white rounded-lg shadow-lg relative overflow-hidden max-w-4xl mx-auto">
+    <!-- BOARDS tab -->
+    <div class="absolute top-0 left-0 bg-blue-500 text-white px-4 py-2 z-10">
+      BOARDS
+    </div>
+
     <div class="flex flex-col md:flex-row">
-      <div class="w-full md:w-1/2 relative mb-6 md:mb-0 flex">
-        <div class="w-5/6">
-          <div class="aspect-w-4 aspect-h-3">
-            <img :src="currentProduct.images[selectedImageIndex]" :alt="currentProduct.name" class="object-cover w-full h-full rounded">
-          </div>
-        </div>
-        <div class="w-1/6 pl-2 flex flex-col space-y-2">
-          <div v-for="(image, index) in currentProduct.images" :key="index" 
-               class="aspect-w-1 aspect-h-1 cursor-pointer"
-               @click="selectedImageIndex = index">
-            <img :src="image" :alt="`Thumbnail ${index + 1}`" class="object-cover w-full h-full rounded">
-          </div>
+      <!-- Left side: Main image and thumbnails -->
+      <div class="w-full md:w-3/5 relative pt-2">
+        <img :src="currentProduct.images[selectedImageIndex]" :alt="currentProduct.name" class="w-full object-cover">
+        <div class="absolute right-0 top-0 bottom-0 w-1/6 bg-white bg-opacity-75 p-2 flex flex-col justify-center space-y-2">
+          <img v-for="(image, index) in currentProduct.images.slice(1)" :key="index" 
+               :src="image" :alt="`Thumbnail ${index + 1}`" 
+               @click="selectedImageIndex = index + 1"
+               class="w-full aspect-square object-cover cursor-pointer">
         </div>
       </div>
-      
-      <div class="w-full md:w-1/2 md:pl-8">
-        <h2 class="text-2xl font-bold mb-2">{{ currentProduct.name }}</h2>
+
+      <!-- Right side: Product details -->
+      <div class="w-full md:w-2/5 p-4 md:p-6">
+        <h2 class="text-xl font-bold mb-2">{{ currentProduct.name }}</h2>
         <div class="flex items-center mb-4">
           <div class="flex text-yellow-400">
-            <i v-for="n in 5" :key="n" :class="['fas', n <= currentProduct.rating ? 'fa-star' : 'fa-star-o']"></i>
+            <span v-for="n in 5" :key="n" class="mr-1">{{ n <= currentProduct.rating ? '★' : '☆' }}</span>
           </div>
           <span class="ml-2 text-gray-600">({{ currentProduct.reviewCount }})</span>
         </div>
         
         <div class="mb-4">
-          <div class="flex border-b">
+          <div class="flex border-b overflow-x-auto">
             <button 
               v-for="tab in tabs" 
               :key="tab"
               @click="currentTab = tab"
-              :class="['px-4 py-2 font-semibold text-sm', currentTab === tab ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500']"
+              :class="['px-4 py-2 font-semibold text-sm whitespace-nowrap', currentTab === tab ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500']"
             >
               {{ tab.toUpperCase() }}
             </button>
@@ -39,7 +41,7 @@
           <div class="py-4">
             <p v-if="currentTab === 'description'" class="text-sm">{{ currentProduct.description }}</p>
             <ul v-else-if="currentTab === 'features'" class="text-sm">
-              <li v-for="feature in currentProduct.features" :key="feature">{{ feature }}</li>
+              <li v-for="feature in currentProduct.features" :key="feature" class="mb-1">{{ feature }}</li>
             </ul>
             <div v-else-if="currentTab === 'dimensions'" class="text-sm">
               <p v-for="(value, key) in currentProduct.dimensions" :key="key">
@@ -49,9 +51,9 @@
           </div>
         </div>
         
-        <div class="flex justify-between items-center">
-          <span class="text-2xl font-bold">${{ currentProduct.price.toFixed(2) }}</span>
-          <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+        <div class="flex flex-col sm:flex-row justify-between items-center">
+          <span class="text-2xl font-bold mb-2 sm:mb-0">${{ currentProduct.price.toFixed(2) }}</span>
+          <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 w-full sm:w-auto">
             BUY NOW
           </button>
         </div>
@@ -60,12 +62,13 @@
       </div>
     </div>
     
-    <div class="absolute top-4 right-4 flex space-x-2">
-      <button @click="prevProduct" class="bg-yellow-400 text-white p-2 rounded-full">&lt;</button>
-      <button @click="nextProduct" class="bg-yellow-400 text-white p-2 rounded-full">&gt;</button>
-    </div>
-    <div class="absolute top-4 right-20 bg-black text-white px-2 py-1 text-sm">
-      {{ currentProductIndex + 1 }}/{{ products.length }}
+    <!-- Navigation arrows and counter -->
+    <div class="absolute top-4 right-4 flex items-center space-x-2">
+      <div class="bg-black text-white px-2 py-1 text-sm rounded">
+        {{ currentProductIndex + 1 }}/{{ products.length }}
+      </div>
+      <button @click="prevProduct" class="bg-yellow-400 text-white p-2 rounded-full w-8 h-8 flex items-center justify-center">&lt;</button>
+      <button @click="nextProduct" class="bg-yellow-400 text-white p-2 rounded-full w-8 h-8 flex items-center justify-center">&gt;</button>
     </div>
   </div>
 </template>
@@ -89,7 +92,7 @@ const products = [
     ],
     rating: 4,
     reviewCount: 52,
-    description: "Easy to ride, care free surfing craft that's fun for everyone...",
+    description: "Easy to ride, care free surfing craft that's fun for everyone, paddles well, super fast down the line and great for any level of surfing depending on who rides it. The Donny Stoker, a rework on design from stokesys first ever pro model. A super easy to surf and fun board. The Donny Stoker is a board for total freesurfing expression.",
     features: ["Lightweight construction", "High-performance shape", "Durable finish"],
     dimensions: { length: '6\'2"', width: '19 1/4"', thickness: '2 5/8"' },
     price: 499.99
