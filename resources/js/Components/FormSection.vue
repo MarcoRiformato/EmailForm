@@ -13,55 +13,58 @@
         <!-- Contact Form -->
         <form @submit.prevent="sendEmail" class="space-y-6">
           <div>
-            <input type="text" name="name" id="name" placeholder="Name" v-model="form.name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+            <input type="text" name="name" id="name" placeholder="Name" v-model="form.name" :class="{ 'border-red-500': form.errors.name }" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+            <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">{{ form.errors.name }}</p>
           </div>
           <div>
-            <input type="text" name="surname" id="surname" placeholder="Surname" v-model="form.surname" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+            <input type="text" name="surname" id="surname" placeholder="Surname" v-model="form.surname" :class="{ 'border-red-500': form.errors.surname }" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+            <p v-if="form.errors.surname" class="mt-1 text-sm text-red-600">{{ form.errors.surname }}</p>
           </div>
           <div>
-            <input type="email" name="email" id="email" placeholder="Email" v-model="form.email" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+            <input type="email" name="email" id="email" placeholder="Email" v-model="form.email" :class="{ 'border-red-500': form.errors.email }" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+            <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">{{ form.errors.email }}</p>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <select name="birthPlace" id="birth-place" v-model="form.birthPlace" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+              <select name="birthPlace" id="birth-place" v-model="form.birthPlace" :class="{ 'border-red-500': form.errors.birthPlace }" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
                 <option value="" disabled selected>Birth place</option>
-                <!-- Add options here -->
                 <option value="city1">City 1</option>
                 <option value="city2">City 2</option>
               </select>
+              <p v-if="form.errors.birthPlace" class="mt-1 text-sm text-red-600">{{ form.errors.birthPlace }}</p>
             </div>
             <div>
-              <input type="date" name="birthday" id="birthday" v-model="form.birthday" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+              <input type="date" name="birthday" id="birthday" v-model="form.birthday" :class="{ 'border-red-500': form.errors.birthday }" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+              <p v-if="form.errors.birthday" class="mt-1 text-sm text-red-600">{{ form.errors.birthday }}</p>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <input type="tel" name="phone" id="phone" placeholder="Phone" v-model="form.phone" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+              <input type="tel" name="phone" id="phone" placeholder="Phone" v-model="form.phone" :class="{ 'border-red-500': form.errors.phone }" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+              <p v-if="form.errors.phone" class="mt-1 text-sm text-red-600">{{ form.errors.phone }}</p>
             </div>
             <div>
-              <input type="text" name="company" id="company" placeholder="Company" v-model="form.company" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+              <input type="text" name="company" id="company" placeholder="Company" v-model="form.company" :class="{ 'border-red-500': form.errors.company }" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
+              <p v-if="form.errors.company" class="mt-1 text-sm text-red-600">{{ form.errors.company }}</p>
             </div>
           </div>
           <div>
-            <textarea name="message" id="message" rows="4" v-model="form.message" placeholder="Your Message" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"></textarea>
+            <textarea name="message" id="message" rows="4" v-model="form.message" placeholder="Your Message" :class="{ 'border-red-500': form.errors.message }" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"></textarea>
+            <p v-if="form.errors.message" class="mt-1 text-sm text-red-600">{{ form.errors.message }}</p>
           </div>
           <div class="flex items-center">
-            <input type="checkbox" name="privacyPolicy" id="privacy-policy" v-model="form.privacyPolicy" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600">
+            <input type="checkbox" name="privacyPolicy" id="privacy-policy" v-model="form.privacyPolicy" :class="{ 'border-red-500': form.errors.privacyPolicy }" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600">
             <label for="privacy-policy" class="ml-2 block text-sm text-gray-900">Accept privacy policy</label>
           </div>
+          <p v-if="form.errors.privacyPolicy" class="mt-1 text-sm text-red-600">{{ form.errors.privacyPolicy }}</p>
 
-          <div v-if="form.errors" class="text-red-600">
-      <div v-for="(error, key) in form.errors" :key="key">{{ error }}</div>
-    </div>
-    
-    <div v-if="form.recentlySuccessful" class="text-green-600">
-      Email sent successfully!
-    </div>
+          <div v-if="form.recentlySuccessful" class="text-green-600">
+            Email sent successfully!
+          </div>
 
-    <button type="submit" :disabled="form.processing" class="w-full rounded-md bg-blue-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
-      {{ form.processing ? 'Sending...' : 'SEND' }}
-    </button>
-          
+          <button type="submit" :disabled="form.processing" class="w-full rounded-md bg-blue-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+            {{ form.processing ? 'Sending...' : 'SEND' }}
+          </button>
         </form>
       </div>
 
