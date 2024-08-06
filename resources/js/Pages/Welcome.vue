@@ -15,7 +15,7 @@
       <!-- Product Showcase -->
       <section class="relative -mt-40 z-10">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="bg-white rounded-lg shadow-lg">
+          <div class="bg-white shadow-lg">
             <ProductShowcase/>
           </div>
         </div>
@@ -23,18 +23,13 @@
     </div>
 
     <!-- About Section -->
-    <section class="py-16 bg-gray-100">
+    <section class="bg-gray-100">
       <About/>
     </section>
 
     <!-- Contact Form -->
-    <section class="bg-gray-100">
+    <section class="bg-black">
       <FormSection/>
-    </section>
-
-    <!-- Instagram Feed -->
-    <section class="py-16 bg-white">
-      <!-- Instagram feed content -->
     </section>
   </AppLayout>
 </template>

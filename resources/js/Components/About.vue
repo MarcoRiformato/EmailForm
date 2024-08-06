@@ -1,30 +1,32 @@
 <template>
-    <section class="relative h-screen bg-cover bg-center" style="background-image: url('https://picsum.photos/1600/900?random=10');">
-      <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-      <div class="container mx-auto h-full flex items-center">
-        <div class="bg-white p-8 max-w-md relative z-10">
-          <h2 class="text-2xl font-bold mb-2">WE ARE SURFERS CO.</h2>
-          <div class="text-xl font-bold mb-4">×</div>
-          <p class="mb-4">
-            Lorem ipsum dolor sit amet, aeneam consectetur adipiscing elit. Fusce iaculis feugiat arcunum fermentum hendrerit. Suspendisse auctor labor nisi, et interdum diam facilisis, aliquam pulvinar semi egetis belle sollicitudin ut. Nullam tincidun finibustus scelerisque.
-          </p>
-          <a href="#" class="text-blue-500 hover:underline">Read more</a>
-        </div>
+  <div class="w-full h-screen bg-blue-600 relative overflow-hidden">
+    <!-- White background section -->
+    <div class="absolute bottom-0 left-0 right-0 h-1/4 bg-white"></div>
+
+    <!-- Text content area (left side) -->
+    <div class="absolute right-[55%] top-[20%] w-[45%] bg-white shadow-lg overflow-hidden">
+      <div class="p-8">
+        <h2 class="text-2xl font-bold mb-2">WE ARE SURFERS CO.</h2>
+        <div class="text-xl mb-4">×</div>
+        <p class="text-sm text-gray-700 mb-4 leading-relaxed">
+          Lorem ipsum dolor sit amet, aeneam consectetur adipiscing elit. Fusce
+          iaculis feugiat arcunum fermentum hendrerit. Suspendisse auctor labor
+          nisi, et interdum diam facilisis, aliquam pulvinar semi egetis belle
+          sollicitudin ut. Nullam tincidun finibustus scelerisque.
+        </p>
+        <a href="#" class="text-blue-500 hover:underline text-sm">Read more</a>
       </div>
-      <div class="absolute bottom-8 right-8 w-64 h-48">
-        <img src="https://picsum.photos/400/300?random=11" alt="Surfer" class="w-full h-full object-cover">
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div class="bg-white rounded-full p-4 cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-        </div>
+    </div>
+    
+    <!-- Image area (right side) -->
+    <div class="absolute right-[10%] bottom-[15%] w-[40%] aspect-video shadow-lg overflow-hidden">
+      <img src="https://picsum.photos/800/600" alt="Surfer" class="w-full h-full object-cover" />
+      <!-- Play button overlay -->
+      <div class="absolute top-4 right-4 bg-white rounded-full p-3 shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+        </svg>
       </div>
-    </section>
-  </template>
-  
-  <script setup>
-  // No script needed for this component
-  </script>
+    </div>
+  </div>
+</template>

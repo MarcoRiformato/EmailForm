@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg shadow-lg relative overflow-hidden max-w-4xl mx-auto">
+  <div class="bg-white shadow-lg relative overflow-hidden max-w-4xl mx-auto">
     <!-- BOARDS tab -->
     <div class="absolute top-0 left-0 bg-blue-500 text-white px-4 py-2 z-10">
       BOARDS
